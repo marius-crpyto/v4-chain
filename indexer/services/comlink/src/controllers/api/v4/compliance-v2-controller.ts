@@ -434,12 +434,9 @@ async function upsertComplianceStatus(
       reason: getGeoComplianceReason(req.headers as GeoOriginHeaders)!,
       updatedAt,
     });
-  }
-
-  if (
+  } else if (
     complianceStatus[0].status === ComplianceStatus.FIRST_STRIKE ||
     complianceStatus[0].status === ComplianceStatus.FIRST_STRIKE_CLOSE_ONLY ||
-    complianceStatus[0].status === ComplianceStatus.BLOCKED ||
     complianceStatus[0].status === ComplianceStatus.COMPLIANT
   ) {
     if (restricted) {

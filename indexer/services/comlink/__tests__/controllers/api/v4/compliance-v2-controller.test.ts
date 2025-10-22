@@ -719,10 +719,9 @@ describe('ComplianceV2Controller', () => {
     });
 
     it.each([
-      ComplianceStatus.BLOCKED,
       ComplianceStatus.FIRST_STRIKE,
       ComplianceStatus.FIRST_STRIKE_CLOSE_ONLY,
-    ])('should set status to COMPLIANT for any action from a non-restricted country with existing compliance status not CLOSE_ONLY', async (status: ComplianceStatus) => {
+    ])('should set status to COMPLIANT for any action from a non-restricted country with existing compliance status FIRST_STRIKE or FIRST_STRIKE_CLOSE_ONLY', async (status: ComplianceStatus) => {
       isRestrictedCountryHeadersSpy.mockReturnValue(false);
 
       await ComplianceStatusTable.create({
@@ -746,6 +745,33 @@ describe('ComplianceV2Controller', () => {
       expect(data[0]).toEqual(expect.objectContaining({
         address: testConstants.defaultAddress,
         status: ComplianceStatus.COMPLIANT,
+      }));
+    });
+
+    it('should leave status at BLOCKED for any action from a non-restricted country with existing compliance status BLOCKED', async () => {
+      isRestrictedCountryHeadersSpy.mockReturnValue(false);
+
+      await ComplianceStatusTable.create({
+        address: testConstants.defaultAddress,
+        status: ComplianceStatus.BLOCKED,
+      });
+
+      const response: any = await sendRequest({
+        type: RequestMethod.POST,
+        path: endpoint,
+        body,
+        expectedStatus: 200,
+      });
+
+      expect(response.body.updatedAt).toBeDefined();
+      expect(response.body.status).toEqual(ComplianceStatus.BLOCKED);
+
+      const data: ComplianceStatusFromDatabase[] = await ComplianceStatusTable.findAll({}, [], {});
+
+      expect(data).toHaveLength(1);
+      expect(data[0]).toEqual(expect.objectContaining({
+        address: testConstants.defaultAddress,
+        status: ComplianceStatus.BLOCKED,
       }));
     });
 
