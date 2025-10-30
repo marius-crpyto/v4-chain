@@ -60,8 +60,7 @@ TEST_ACCOUNTS=(
 )
 
 FAUCET_ACCOUNTS=(
-	#"dydx1nzuttarf5k2j0nug5yzhr6p74t9avehn9hlh8m" # main faucet
-	"dydx1vdj5z5u9g5t5z22xknsvn59ga3rdtu0j5pfwcp"
+	"dydx1nzuttarf5k2j0nug5yzhr6p74t9avehn9hlh8m" # main faucet
 )
 
 # Addresses of vaults.
@@ -114,8 +113,8 @@ create_validators() {
 		# Using "@" as a subscript results in separate args: "dydx1..." "dydx1..." "dydx1..."
 		# Note: `edit_genesis` must be called before `add-genesis-account`.
 		# edit_genesis "$VAL_CONFIG_DIR" "${TEST_ACCOUNTS[*]}" "${FAUCET_ACCOUNTS[*]}" "${VAULT_ACCOUNTS[*]}" "${VAULT_NUMBERS[*]}" "" "" "" ""
-		edit_genesis_new "$VAL_CONFIG_DIR" "" "${FAUCET_ACCOUNTS[*]}" "${VAULT_ACCOUNTS[*]}" "${VAULT_NUMBERS[*]}" "" "" "" ""
-		update_genesis_exchange "$VAL_CONFIG_DIR"
+		edit_genesis "$VAL_CONFIG_DIR" "" "${FAUCET_ACCOUNTS[*]}" "${VAULT_ACCOUNTS[*]}" "${VAULT_NUMBERS[*]}" "" "" "" ""
+		update_genesis_use_test_volatile_market "$VAL_CONFIG_DIR"
 		update_genesis_complete_bridge_delay "$VAL_CONFIG_DIR" "30"
 
 		echo "${MNEMONICS[$i]}" | dydxprotocold keys add "${MONIKERS[$i]}" --recover --keyring-backend=test --home "$VAL_HOME_DIR"
@@ -171,9 +170,8 @@ setup_cosmovisor() {
 use_slinky() {
   CONFIG_FOLDER=$1
   # Enable slinky daemon
-  #dasel put -t bool -f "$CONFIG_FOLDER"/app.toml 'oracle.enabled' -v true
-  dasel put -t bool -f "$CONFIG_FOLDER"/app.toml 'oracle.enabled' -v false
-  dasel put -t string -f "$VAL_CONFIG_DIR"/app.toml 'oracle.oracle_address' -v 'slinky0:8080'
+  dasel put -t bool -f "$CONFIG_FOLDER"/app.toml 'oracle.enabled' -v true
+	dasel put -t string -f "$VAL_CONFIG_DIR"/app.toml 'oracle.oracle_address' -v 'slinky0:8080'
 }
 
 # TODO(DEC-1894): remove this function once we migrate off of persistent peers.
@@ -188,8 +186,6 @@ edit_config() {
 	# Default `timeout_commit` is 999ms. For local testnet, use a larger value to make 
 	# block time longer for easier troubleshooting.
 	dasel put -t string -f "$CONFIG_FOLDER"/config.toml '.consensus.timeout_commit' -v '5s'
-
-	dasel put -t string -f "$CONFIG_FOLDER"/config.toml '.rpc.unsafe' -v 'true'
 
   # Enable Slinky Prometheus metrics
 	dasel put -t bool -f "$CONFIG_FOLDER"/app.toml '.oracle.metrics_enabled' -v 'true'

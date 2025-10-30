@@ -1,0 +1,75 @@
+   0.058134500s  INFO prepare_target{force=false package_id=dydx-proto v0.4.0 (/Users/marius/work/person_project/v4-chain/v4-proto-rs) target="dydx_proto"}: cargo::core::compiler::fingerprint: fingerprint dirty for dydx-proto v0.4.0 (/Users/marius/work/person_project/v4-chain/v4-proto-rs)/Check { test: false }/TargetInner { name_inferred: true, doctest: false, ..: lib_target("dydx_proto", ["lib"], "/Users/marius/work/person_project/v4-chain/v4-proto-rs/src/lib.rs", Edition2021) }
+   0.058158417s  INFO prepare_target{force=false package_id=dydx-proto v0.4.0 (/Users/marius/work/person_project/v4-chain/v4-proto-rs) target="dydx_proto"}: cargo::core::compiler::fingerprint:     dirty: FsStatusOutdated(Stale)
+   0.058374959s  INFO prepare_target{force=false package_id=cosmos-sdk-proto v0.27.0 target="cosmos_sdk_proto"}: cargo::core::compiler::fingerprint: fingerprint dirty for cosmos-sdk-proto v0.27.0/Check { test: false }/TargetInner { name_inferred: true, ..: lib_target("cosmos_sdk_proto", ["lib"], "/Users/marius/.cargo/registry/src/index.crates.io-6f17d22bba15001f/cosmos-sdk-proto-0.27.0/src/lib.rs", Edition2021) }
+   0.058380750s  INFO prepare_target{force=false package_id=cosmos-sdk-proto v0.27.0 target="cosmos_sdk_proto"}: cargo::core::compiler::fingerprint:     dirty: FsStatusOutdated(Stale)
+   0.058526125s  INFO prepare_target{force=false package_id=prost v0.13.5 target="prost"}: cargo::core::compiler::fingerprint: fingerprint dirty for prost v0.13.5/Check { test: false }/TargetInner { benched: false, ..: lib_target("prost", ["lib"], "/Users/marius/.cargo/registry/src/index.crates.io-6f17d22bba15001f/prost-0.13.5/src/lib.rs", Edition2021) }
+   0.058532042s  INFO prepare_target{force=false package_id=prost v0.13.5 target="prost"}: cargo::core::compiler::fingerprint:     dirty: FsStatusOutdated(Stale)
+   0.058650792s  INFO prepare_target{force=false package_id=bytes v1.10.1 target="bytes"}: cargo::core::compiler::fingerprint: fingerprint dirty for bytes v1.10.1/Check { test: false }/TargetInner { ..: lib_target("bytes", ["lib"], "/Users/marius/.cargo/registry/src/index.crates.io-6f17d22bba15001f/bytes-1.10.1/src/lib.rs", Edition2018) }
+   0.058655875s  INFO prepare_target{force=false package_id=bytes v1.10.1 target="bytes"}: cargo::core::compiler::fingerprint:     dirty: FsStatusOutdated(Stale)
+   0.058755084s  INFO prepare_target{force=false package_id=serde v1.0.228 target="serde"}: cargo::core::compiler::fingerprint: fingerprint dirty for serde v1.0.228/Check { test: false }/TargetInner { ..: lib_target("serde", ["lib"], "/Users/marius/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde-1.0.228/src/lib.rs", Edition2021) }
+   0.058759792s  INFO prepare_target{force=false package_id=serde v1.0.228 target="serde"}: cargo::core::compiler::fingerprint:     dirty: FsStatusOutdated(Stale)
+   0.059011459s  INFO prepare_target{force=false package_id=serde_core v1.0.228 target="serde_core"}: cargo::core::compiler::fingerprint: fingerprint dirty for serde_core v1.0.228/Check { test: false }/TargetInner { ..: lib_target("serde_core", ["lib"], "/Users/marius/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde_core-1.0.228/src/lib.rs", Edition2021) }
+   0.059016459s  INFO prepare_target{force=false package_id=serde_core v1.0.228 target="serde_core"}: cargo::core::compiler::fingerprint:     dirty: FsStatusOutdated(Stale)
+   0.059796250s  INFO prepare_target{force=false package_id=tendermint-proto v0.40.4 target="tendermint_proto"}: cargo::core::compiler::fingerprint: fingerprint dirty for tendermint-proto v0.40.4/Check { test: false }/TargetInner { ..: lib_target("tendermint_proto", ["lib"], "/Users/marius/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tendermint-proto-0.40.4/src/lib.rs", Edition2021) }
+   0.059801125s  INFO prepare_target{force=false package_id=tendermint-proto v0.40.4 target="tendermint_proto"}: cargo::core::compiler::fingerprint:     dirty: FsStatusOutdated(Stale)
+   0.060175084s  INFO prepare_target{force=false package_id=serde_bytes v0.11.19 target="serde_bytes"}: cargo::core::compiler::fingerprint: fingerprint dirty for serde_bytes v0.11.19/Check { test: false }/TargetInner { ..: lib_target("serde_bytes", ["lib"], "/Users/marius/.cargo/registry/src/index.crates.io-6f17d22bba15001f/serde_bytes-0.11.19/src/lib.rs", Edition2018) }
+   0.060180209s  INFO prepare_target{force=false package_id=serde_bytes v0.11.19 target="serde_bytes"}: cargo::core::compiler::fingerprint:     dirty: FsStatusOutdated(Stale)
+   0.060333625s  INFO prepare_target{force=false package_id=time v0.3.44 target="time"}: cargo::core::compiler::fingerprint: fingerprint dirty for time v0.3.44/Check { test: false }/TargetInner { benched: false, ..: lib_target("time", ["lib"], "/Users/marius/.cargo/registry/src/index.crates.io-6f17d22bba15001f/time-0.3.44/src/lib.rs", Edition2021) }
+   0.060339250s  INFO prepare_target{force=false package_id=time v0.3.44 target="time"}: cargo::core::compiler::fingerprint:     dirty: FsStatusOutdated(Stale)
+   0.060524084s  INFO prepare_target{force=false package_id=deranged v0.5.5 target="deranged"}: cargo::core::compiler::fingerprint: fingerprint dirty for deranged v0.5.5/Check { test: false }/TargetInner { ..: lib_target("deranged", ["lib"], "/Users/marius/.cargo/registry/src/index.crates.io-6f17d22bba15001f/deranged-0.5.5/src/lib.rs", Edition2021) }
+   0.060528584s  INFO prepare_target{force=false package_id=deranged v0.5.5 target="deranged"}: cargo::core::compiler::fingerprint:     dirty: FsStatusOutdated(Stale)
+   0.060789625s  INFO prepare_target{force=false package_id=tonic v0.13.1 target="tonic"}: cargo::core::compiler::fingerprint: fingerprint dirty for tonic v0.13.1/Check { test: false }/TargetInner { ..: lib_target("tonic", ["lib"], "/Users/marius/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tonic-0.13.1/src/lib.rs", Edition2021) }
+   0.060794334s  INFO prepare_target{force=false package_id=tonic v0.13.1 target="tonic"}: cargo::core::compiler::fingerprint:     dirty: FsStatusOutdated(Stale)
+   0.061315084s  INFO prepare_target{force=false package_id=h2 v0.4.12 target="h2"}: cargo::core::compiler::fingerprint: fingerprint dirty for h2 v0.4.12/Check { test: false }/TargetInner { ..: lib_target("h2", ["lib"], "/Users/marius/.cargo/registry/src/index.crates.io-6f17d22bba15001f/h2-0.4.12/src/lib.rs", Edition2021) }
+   0.061319584s  INFO prepare_target{force=false package_id=h2 v0.4.12 target="h2"}: cargo::core::compiler::fingerprint:     dirty: FsStatusOutdated(Stale)
+   0.061708875s  INFO prepare_target{force=false package_id=http v1.3.1 target="http"}: cargo::core::compiler::fingerprint: fingerprint dirty for http v1.3.1/Check { test: false }/TargetInner { ..: lib_target("http", ["lib"], "/Users/marius/.cargo/registry/src/index.crates.io-6f17d22bba15001f/http-1.3.1/src/lib.rs", Edition2018) }
+   0.061713209s  INFO prepare_target{force=false package_id=http v1.3.1 target="http"}: cargo::core::compiler::fingerprint:     dirty: FsStatusOutdated(Stale)
+   0.062023084s  INFO prepare_target{force=false package_id=tokio v1.48.0 target="tokio"}: cargo::core::compiler::fingerprint: fingerprint dirty for tokio v1.48.0/Check { test: false }/TargetInner { ..: lib_target("tokio", ["lib"], "/Users/marius/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tokio-1.48.0/src/lib.rs", Edition2021) }
+   0.062028084s  INFO prepare_target{force=false package_id=tokio v1.48.0 target="tokio"}: cargo::core::compiler::fingerprint:     dirty: FsStatusOutdated(Stale)
+   0.062553000s  INFO prepare_target{force=false package_id=tokio-util v0.7.16 target="tokio_util"}: cargo::core::compiler::fingerprint: fingerprint dirty for tokio-util v0.7.16/Check { test: false }/TargetInner { ..: lib_target("tokio_util", ["lib"], "/Users/marius/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tokio-util-0.7.16/src/lib.rs", Edition2021) }
+   0.062557709s  INFO prepare_target{force=false package_id=tokio-util v0.7.16 target="tokio_util"}: cargo::core::compiler::fingerprint:     dirty: FsStatusOutdated(Stale)
+   0.062875709s  INFO prepare_target{force=false package_id=http-body v1.0.1 target="http_body"}: cargo::core::compiler::fingerprint: fingerprint dirty for http-body v1.0.1/Check { test: false }/TargetInner { ..: lib_target("http_body", ["lib"], "/Users/marius/.cargo/registry/src/index.crates.io-6f17d22bba15001f/http-body-1.0.1/src/lib.rs", Edition2018) }
+   0.062880459s  INFO prepare_target{force=false package_id=http-body v1.0.1 target="http_body"}: cargo::core::compiler::fingerprint:     dirty: FsStatusOutdated(Stale)
+   0.063009625s  INFO prepare_target{force=false package_id=http-body-util v0.1.3 target="http_body_util"}: cargo::core::compiler::fingerprint: fingerprint dirty for http-body-util v0.1.3/Check { test: false }/TargetInner { ..: lib_target("http_body_util", ["lib"], "/Users/marius/.cargo/registry/src/index.crates.io-6f17d22bba15001f/http-body-util-0.1.3/src/lib.rs", Edition2018) }
+   0.063014459s  INFO prepare_target{force=false package_id=http-body-util v0.1.3 target="http_body_util"}: cargo::core::compiler::fingerprint:     dirty: FsStatusOutdated(Stale)
+   0.063200667s  INFO prepare_target{force=false package_id=hyper v1.7.0 target="hyper"}: cargo::core::compiler::fingerprint: fingerprint dirty for hyper v1.7.0/Check { test: false }/TargetInner { ..: lib_target("hyper", ["lib"], "/Users/marius/.cargo/registry/src/index.crates.io-6f17d22bba15001f/hyper-1.7.0/src/lib.rs", Edition2021) }
+   0.063205375s  INFO prepare_target{force=false package_id=hyper v1.7.0 target="hyper"}: cargo::core::compiler::fingerprint:     dirty: FsStatusOutdated(Stale)
+   0.063896250s  INFO prepare_target{force=false package_id=hyper-timeout v0.5.2 target="hyper_timeout"}: cargo::core::compiler::fingerprint: fingerprint dirty for hyper-timeout v0.5.2/Check { test: false }/TargetInner { ..: lib_target("hyper_timeout", ["lib"], "/Users/marius/.cargo/registry/src/index.crates.io-6f17d22bba15001f/hyper-timeout-0.5.2/src/lib.rs", Edition2018) }
+   0.063901042s  INFO prepare_target{force=false package_id=hyper-timeout v0.5.2 target="hyper_timeout"}: cargo::core::compiler::fingerprint:     dirty: FsStatusOutdated(Stale)
+   0.064097584s  INFO prepare_target{force=false package_id=hyper-util v0.1.17 target="hyper_util"}: cargo::core::compiler::fingerprint: fingerprint dirty for hyper-util v0.1.17/Check { test: false }/TargetInner { ..: lib_target("hyper_util", ["lib"], "/Users/marius/.cargo/registry/src/index.crates.io-6f17d22bba15001f/hyper-util-0.1.17/src/lib.rs", Edition2021) }
+   0.064102250s  INFO prepare_target{force=false package_id=hyper-util v0.1.17 target="hyper_util"}: cargo::core::compiler::fingerprint:     dirty: FsStatusOutdated(Stale)
+   0.064457084s  INFO prepare_target{force=false package_id=futures-util v0.3.31 target="futures_util"}: cargo::core::compiler::fingerprint: fingerprint dirty for futures-util v0.3.31/Check { test: false }/TargetInner { ..: lib_target("futures_util", ["lib"], "/Users/marius/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-util-0.3.31/src/lib.rs", Edition2018) }
+   0.064462000s  INFO prepare_target{force=false package_id=futures-util v0.3.31 target="futures_util"}: cargo::core::compiler::fingerprint:     dirty: FsStatusOutdated(Stale)
+   0.064832209s  INFO prepare_target{force=false package_id=tokio-stream v0.1.17 target="tokio_stream"}: cargo::core::compiler::fingerprint: fingerprint dirty for tokio-stream v0.1.17/Check { test: false }/TargetInner { ..: lib_target("tokio_stream", ["lib"], "/Users/marius/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tokio-stream-0.1.17/src/lib.rs", Edition2021) }
+   0.064837209s  INFO prepare_target{force=false package_id=tokio-stream v0.1.17 target="tokio_stream"}: cargo::core::compiler::fingerprint:     dirty: FsStatusOutdated(Stale)
+   0.064996917s  INFO prepare_target{force=false package_id=tower v0.5.2 target="tower"}: cargo::core::compiler::fingerprint: fingerprint dirty for tower v0.5.2/Check { test: false }/TargetInner { ..: lib_target("tower", ["lib"], "/Users/marius/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tower-0.5.2/src/lib.rs", Edition2018) }
+   0.065001417s  INFO prepare_target{force=false package_id=tower v0.5.2 target="tower"}: cargo::core::compiler::fingerprint:     dirty: FsStatusOutdated(Stale)
+   0.067812709s  INFO prepare_target{force=false package_id=prost-types v0.13.5 target="prost_types"}: cargo::core::compiler::fingerprint: fingerprint dirty for prost-types v0.13.5/Check { test: false }/TargetInner { doctest: false, ..: lib_target("prost_types", ["lib"], "/Users/marius/.cargo/registry/src/index.crates.io-6f17d22bba15001f/prost-types-0.13.5/src/lib.rs", Edition2021) }
+   0.067823750s  INFO prepare_target{force=false package_id=prost-types v0.13.5 target="prost_types"}: cargo::core::compiler::fingerprint:     dirty: FsStatusOutdated(Stale)
+   0.068007209s  INFO prepare_target{force=false package_id=dydx-proto v0.4.0 (/Users/marius/work/person_project/v4-chain/v4-proto-rs) target="dydx_proto"}: cargo::core::compiler::fingerprint: fingerprint dirty for dydx-proto v0.4.0 (/Users/marius/work/person_project/v4-chain/v4-proto-rs)/Check { test: true }/TargetInner { name_inferred: true, doctest: false, ..: lib_target("dydx_proto", ["lib"], "/Users/marius/work/person_project/v4-chain/v4-proto-rs/src/lib.rs", Edition2021) }
+   0.068012334s  INFO prepare_target{force=false package_id=dydx-proto v0.4.0 (/Users/marius/work/person_project/v4-chain/v4-proto-rs) target="dydx_proto"}: cargo::core::compiler::fingerprint:     dirty: FsStatusOutdated(Stale)
+    Checking serde_core v1.0.228
+    Checking futures-util v0.3.31
+    Checking deranged v0.5.5
+    Checking time v0.3.44
+    Checking serde v1.0.228
+    Checking serde_bytes v0.11.19
+    Checking bytes v1.10.1
+    Checking tokio v1.48.0
+    Checking http v1.3.1
+    Checking prost v0.13.5
+    Checking tendermint-proto v0.40.4
+    Checking prost-types v0.13.5
+    Checking http-body v1.0.1
+    Checking http-body-util v0.1.3
+    Checking tokio-util v0.7.16
+    Checking tokio-stream v0.1.17
+    Checking h2 v0.4.12
+    Checking tower v0.5.2
+    Checking hyper v1.7.0
+    Checking hyper-util v0.1.17
+    Checking hyper-timeout v0.5.2
+    Checking tonic v0.13.1
+    Checking cosmos-sdk-proto v0.27.0
+    Checking dydx-proto v0.4.0 (/Users/marius/work/person_project/v4-chain/v4-proto-rs)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 23.51s
