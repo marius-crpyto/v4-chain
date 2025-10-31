@@ -1333,7 +1333,7 @@ function edit_genesis_new() {
 	# 为Bridge模块账户添加tUSDC代币余额
 	# dasel put -t json -f "$GENESIS" ".app_state.bank.balances.[]" -v "{}"
 	# dasel put -t string -f "$GENESIS" ".app_state.bank.balances.[$next_bank_idx].address" -v "${BRIDGE_MODACC_ADDR}"
-	# dasel put -t json -f "$GENESIS" ".app_state.bank.balances.[$next_bank_idx].coins.[]" -v "{}"
+	dasel put -t json -f "$GENESIS" ".app_state.bank.balances.[$next_bank_idx].coins.[]" -v "{}"
 	dasel put -t string -f "$GENESIS" ".app_state.bank.balances.[$next_bank_idx].coins.[1].denom" -v "${TUSDC_DENOM}"
 	dasel put -t string -f "$GENESIS" ".app_state.bank.balances.[$next_bank_idx].coins.[1].amount" -v "1000000000000000" # 设置合适的初始金额
 
