@@ -619,6 +619,14 @@ function edit_genesis_new() {
 	dasel put -t int -f "$GENESIS" '.app_state.assets.assets.[0].market_id' -v '0'
 	dasel put -t int -f "$GENESIS" '.app_state.assets.assets.[0].atomic_resolution' -v '-6'
 
+	dasel put -t int -f "$GENESIS" '.app_state.assets.assets.[1].id' -v '0'
+	dasel put -t string -f "$GENESIS" '.app_state.assets.assets.[1].symbol' -v 'TUSDC'
+	dasel put -t string -f "$GENESIS" '.app_state.assets.assets.[1].denom' -v "$TUSDC_DENOM"
+	dasel put -t string -f "$GENESIS" '.app_state.assets.assets.[1].denom_exponent' -v '-6'
+	dasel put -t bool -f "$GENESIS" '.app_state.assets.assets.[1].has_market' -v 'false'
+	dasel put -t int -f "$GENESIS" '.app_state.assets.assets.[1].market_id' -v '0'
+	dasel put -t int -f "$GENESIS" '.app_state.assets.assets.[1].atomic_resolution' -v '-6'
+
 	# Update bridge module.
 	# dasel put -t string -f "$GENESIS" '.app_state.bridge.event_params.denom' -v "$NATIVE_TOKEN"
 	dasel put -t string -f "$GENESIS" '.app_state.bridge.event_params.denom' -v "$TUSDC_DENOM"
