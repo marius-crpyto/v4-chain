@@ -6,7 +6,7 @@ set -exo pipefail
 
 source "./genesis.sh"
 
-CHAIN_ID="localdydxprotocol"
+CHAIN_ID="localdexprotocol"
 
 # Define mnemonics for all validators.
 MNEMONICS=(
@@ -114,7 +114,7 @@ create_validators() {
 		# Using "@" as a subscript results in separate args: "dydx1..." "dydx1..." "dydx1..."
 		# Note: `edit_genesis` must be called before `add-genesis-account`.
 		# edit_genesis "$VAL_CONFIG_DIR" "${TEST_ACCOUNTS[*]}" "${FAUCET_ACCOUNTS[*]}" "${VAULT_ACCOUNTS[*]}" "${VAULT_NUMBERS[*]}" "" "" "" ""
-		edit_genesis_new "$VAL_CONFIG_DIR" "" "${FAUCET_ACCOUNTS[*]}" "${VAULT_ACCOUNTS[*]}" "${VAULT_NUMBERS[*]}" "" "" "" ""
+		edit_genesis_new "$VAL_CONFIG_DIR" "${TEST_ACCOUNTS[*]}" "${FAUCET_ACCOUNTS[*]}" "${VAULT_ACCOUNTS[*]}" "${VAULT_NUMBERS[*]}" "" "" "" ""
 		update_genesis_exchange "$VAL_CONFIG_DIR"
 		update_genesis_complete_bridge_delay "$VAL_CONFIG_DIR" "30"
 
