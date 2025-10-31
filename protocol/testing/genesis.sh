@@ -17,6 +17,10 @@ REWARDS_VESTER_ACCOUNT_ADDR="dydx1ltyc6y4skclzafvpznpt2qjwmfwgsndp458rmp"
 # Obtained from `authtypes.NewModuleAddress(bridgetypes.ModuleName)`.
 BRIDGE_MODACC_ADDR="dydx1zlefkpe3g0vvm9a4h0jf9000lmqutlh9jwjnsv"
 USDC_DENOM="ibc/8E27BA2D5493AF5636760E354E46004562C46AB7EC0CC4C1CA14E9E20E2545B5"
+
+# TUSDC_DENOM is the denom of the tUSDC asset from Ethereum bridge.
+TUSDC_DENOM="tusdc"
+
 REWARD_TOKEN="adv4tnt"
 NATIVE_TOKEN="adv4tnt" # public testnet token
 DEFAULT_SUBACCOUNT_QUOTE_BALANCE=100000000000000000
@@ -33,10 +37,10 @@ TESTNET_VALIDATOR_SELF_DELEGATE_AMOUNT=500000$EIGHTEEN_ZEROS # 5e23 or 500k nati
 FAUCET_NATIVE_TOKEN_BALANCE=50000000$EIGHTEEN_ZEROS # 5e25 or 50 million native tokens. 
 ETH_CHAIN_ID=11155111 # sepolia
 # https://sepolia.etherscan.io/address/0xf75012c350e4ad55be2048bd67ce6e03b20de82d
-ETH_BRIDGE_ADDRESS="0xf75012c350e4ad55be2048bd67ce6e03b20de82d"
+ETH_BRIDGE_ADDRESS="0xa4A7Acf2f06b1CC296E15E8979B546D34446D5c4"
 TOTAL_NATIVE_TOKEN_SUPPLY=1000000000$EIGHTEEN_ZEROS # 1e27
-BRIDGE_GENESIS_ACKNOWLEDGED_NEXT_ID=5
-BRIDGE_GENESIS_ACKNOWLEDGED_ETH_BLOCK_HEIGHT=9394557
+BRIDGE_GENESIS_ACKNOWLEDGED_NEXT_ID=0
+BRIDGE_GENESIS_ACKNOWLEDGED_ETH_BLOCK_HEIGHT=9523502
 
 # Use a fix genesis time from the past.
 GENESIS_TIME="2025-10-01T00:00:00Z"
@@ -118,7 +122,8 @@ function edit_genesis() {
 	dasel put -t int -f "$GENESIS" '.app_state.assets.assets.[0].atomic_resolution' -v '-6'
 
 	# Update bridge module.
-	dasel put -t string -f "$GENESIS" '.app_state.bridge.event_params.denom' -v "$NATIVE_TOKEN"
+	# dasel put -t string -f "$GENESIS" '.app_state.bridge.event_params.denom' -v "$NATIVE_TOKEN"
+	dasel put -t string -f "$GENESIS" '.app_state.bridge.event_params.denom' -v "$TUSDC_DENOM"
 	dasel put -t int -f "$GENESIS" '.app_state.bridge.event_params.eth_chain_id' -v "$ETH_CHAIN_ID"
 	dasel put -t string -f "$GENESIS" '.app_state.bridge.event_params.eth_address' -v "$ETH_BRIDGE_ADDRESS"
 	dasel put -t int -f "$GENESIS" '.app_state.bridge.acknowledged_event_info.next_id' -v "$BRIDGE_GENESIS_ACKNOWLEDGED_NEXT_ID"
@@ -2829,7 +2834,8 @@ function edit_genesis_new() {
 	dasel put -t int -f "$GENESIS" '.app_state.assets.assets.[0].atomic_resolution' -v '-6'
 
 	# Update bridge module.
-	dasel put -t string -f "$GENESIS" '.app_state.bridge.event_params.denom' -v "$NATIVE_TOKEN"
+	# dasel put -t string -f "$GENESIS" '.app_state.bridge.event_params.denom' -v "$NATIVE_TOKEN"
+	dasel put -t string -f "$GENESIS" '.app_state.bridge.event_params.denom' -v "$TUSDC_DENOM"
 	dasel put -t int -f "$GENESIS" '.app_state.bridge.event_params.eth_chain_id' -v "$ETH_CHAIN_ID"
 	dasel put -t string -f "$GENESIS" '.app_state.bridge.event_params.eth_address' -v "$ETH_BRIDGE_ADDRESS"
 	dasel put -t int -f "$GENESIS" '.app_state.bridge.acknowledged_event_info.next_id' -v "$BRIDGE_GENESIS_ACKNOWLEDGED_NEXT_ID"
@@ -3527,6 +3533,13 @@ function edit_genesis_new() {
 	dasel put -t json -f "$GENESIS" ".app_state.bank.balances.[$next_bank_idx].coins.[]" -v "{}"
 	dasel put -t string -f "$GENESIS" ".app_state.bank.balances.[$next_bank_idx].coins.[0].denom" -v "${NATIVE_TOKEN}"
 	dasel put -t string -f "$GENESIS" ".app_state.bank.balances.[$next_bank_idx].coins.[0].amount" -v "${bridge_module_account_balance}"
+
+	# 为Bridge模块账户添加tUSDC代币余额
+	dasel put -t json -f "$GENESIS" ".app_state.bank.balances.[]" -v "{}"
+	dasel put -t string -f "$GENESIS" ".app_state.bank.balances.[$next_bank_idx].address" -v "${BRIDGE_MODACC_ADDR}"
+	dasel put -t json -f "$GENESIS" ".app_state.bank.balances.[$next_bank_idx].coins.[]" -v "{}"
+	dasel put -t string -f "$GENESIS" ".app_state.bank.balances.[$next_bank_idx].coins.[0].denom" -v "${TUSDC_DENOM}"
+	dasel put -t string -f "$GENESIS" ".app_state.bank.balances.[$next_bank_idx].coins.[0].amount" -v "1000000000000000" # 设置合适的初始金额
 
 	# Set denom metadata
 	set_denom_metadata "$NATIVE_TOKEN" "$NATIVE_TOKEN_WHOLE_COIN" "$COIN_NAME"
