@@ -1584,3 +1584,8 @@ function edit_genesis_new() {
 	# Update accountplus module.
 	dasel put -t bool -f "$GENESIS" '.app_state.dydxaccountplus.params.is_smart_account_active' -v 'true'
 }
+
+function cat_genesis() {
+	# cat $1/genesis.json
+	cat $1/genesis.json
+}
