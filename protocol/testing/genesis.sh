@@ -620,7 +620,7 @@ function edit_genesis_new() {
 	dasel put -t int -f "$GENESIS" '.app_state.assets.assets.[0].atomic_resolution' -v '-6'
 
 
-	dasel put -t string -f "$GENESIS" '.app_state.assets.assets.[1]' -v '{}'
+	dasel put -t json -f "$GENESIS" '.app_state.assets.assets.[]' -v '{}'
 	dasel put -t int -f "$GENESIS" '.app_state.assets.assets.[1].id' -v '1'
 	dasel put -t string -f "$GENESIS" '.app_state.assets.assets.[1].symbol' -v 'TUSDC'
 	dasel put -t string -f "$GENESIS" '.app_state.assets.assets.[1].denom' -v "$TUSDC_DENOM"
