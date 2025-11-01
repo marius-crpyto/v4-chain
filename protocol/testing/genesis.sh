@@ -234,7 +234,7 @@ update_genesis_complete_bridge_delay() {
 	GENESIS=$1/genesis.json
 
 	# Reduce complete bridge delay to 600 blocks.
-	dasel put -t int -f "$GENESIS" '.app_state.bridge.safety_params.delay_blocks' -v "$2"
+	dasel put -t int -f "$GENESIS" ".app_state.bridge.safety_params.delay_blocks" -v '$2'
 }
 
 # Set the denom metadata, which is for human readability.
