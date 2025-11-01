@@ -85,6 +85,12 @@ func (s *SubTaskRunnerImpl) RunBridgeDaemonTaskLoop(
 		)
 	}
 
+	logger.Info("Fetching logs from Ethereum Node",
+		"contractAddress", eventParams.Params.EthAddress,
+		"fromBlock", recognizedEventInfo.Info.EthBlockHeight,
+		"firstId", recognizedEventInfo.Info.NextId,
+		"numIds", proposeParams.Params.MaxBridgesPerBlock,
+	)
 	// Fetch logs from Ethereum Node.
 	filterQuery := getFilterQuery(
 		eventParams.Params.EthAddress,
@@ -107,7 +113,17 @@ func (s *SubTaskRunnerImpl) RunBridgeDaemonTaskLoop(
 	newBridgeEvents := make([]bridgetypes.BridgeEvent, len(logs))
 	for i, log := range logs {
 		newBridgeEvents[i] = libeth.BridgeLogToEvent(log, eventParams.Params.Denom)
+		logger.Info("Parsed bridge event",
+			"index", i,
+			"eventID", newBridgeEvents[i].Id,
+			"address", newBridgeEvents[i].Address,
+			"amount", newBridgeEvents[i].Coin.Amount.String(),
+			"denom", newBridgeEvents[i].Coin.Denom)
 	}
+
+	logger.Info("Parsed bridge events",
+		"numEvents", len(newBridgeEvents),
+	)
 
 	// Send bridge events to bridge server.
 	if _, err = serviceClient.AddBridgeEvents(ctx, &api.AddBridgeEventsRequest{
