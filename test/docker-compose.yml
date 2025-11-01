@@ -58,7 +58,7 @@ services:
       - --p2p.persistent_peers 
       - "17e5e45691f0d01449c84fd4ae87279578cdd7ec@dydxprotocold0:26656,47539956aaa8e624e0f1d926040e54908ad0eb44@dydxprotocold2:26656,5882428984d83b03d0c907c1f0af343534987052@dydxprotocold3:26656"
       - --bridge-daemon-eth-rpc-endpoint
-      - "https://eth-sepolia.g.alchemy.com/v2/12d0TgNyJ7ZCB5i_FxNaJIrPXMS9WRCE"
+      - "https://sepolia.infura.io/v3/8c9c865112814ba99725e95df265314c"
       - --price-daemon-enabled
       - "true"
     environment:
@@ -86,7 +86,7 @@ services:
        - "17e5e45691f0d01449c84fd4ae87279578cdd7ec@dydxprotocold0:26656,b69182310be02559483e42c77b7b104352713166@dydxprotocold1:26656,47539956aaa8e624e0f1d926040e54908ad0eb44@dydxprotocold2:26656,5882428984d83b03d0c907c1f0af343534987052@dydxprotocold3:26656"
        - --non-validating-full-node=true
        - --bridge-daemon-eth-rpc-endpoint
-       - "https://eth-sepolia.g.alchemy.com/v2/12d0TgNyJ7ZCB5i_FxNaJIrPXMS9WRCE"
+       - "https://sepolia.infura.io/v3/8c9c865112814ba99725e95df265314c"
        - --indexer-kafka-conn-str
        - "kafka:9092"
     environment:
@@ -112,7 +112,7 @@ services:
        - --p2p.persistent_peers
        - "17e5e45691f0d01449c84fd4ae87279578cdd7ec@dydxprotocold0:26656,47539956aaa8e624e0f1d926040e54908ad0eb44@dydxprotocold2:26656,5882428984d83b03d0c907c1f0af343534987052@dydxprotocold3:26656"
        - --bridge-daemon-eth-rpc-endpoint
-       - "https://eth-sepolia.g.alchemy.com/v2/12d0TgNyJ7ZCB5i_FxNaJIrPXMS9WRCE"
+       - "https://sepolia.infura.io/v3/8c9c865112814ba99725e95df265314c"
        - --price-daemon-enabled
        - "true"
     environment:
@@ -133,7 +133,7 @@ services:
        - --p2p.persistent_peers 
        - "17e5e45691f0d01449c84fd4ae87279578cdd7ec@dydxprotocold0:26656,47539956aaa8e624e0f1d926040e54908ad0eb44@dydxprotocold2:26656,5882428984d83b03d0c907c1f0af343534987052@dydxprotocold3:26656"
        - --bridge-daemon-eth-rpc-endpoint
-       - "https://eth-sepolia.g.alchemy.com/v2/12d0TgNyJ7ZCB5i_FxNaJIrPXMS9WRCE"
+       - "https://sepolia.infura.io/v3/8c9c865112814ba99725e95df265314c"
        - --price-daemon-enabled
        - "true"
     environment:

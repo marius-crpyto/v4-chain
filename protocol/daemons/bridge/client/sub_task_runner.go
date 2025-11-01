@@ -138,7 +138,7 @@ func getFilterQuery(
 
 	return eth.FilterQuery{
 		FromBlock: new(big.Int).SetUint64(fromBlock),
-		ToBlock:   new(big.Int).SetUint64(fromBlock + 9), //big.NewInt(ethrpc.FinalizedBlockNumber.Int64()),
+		ToBlock:   new(big.Int).SetUint64(fromBlock + 1000), //big.NewInt(ethrpc.FinalizedBlockNumber.Int64()),
 		Addresses: []ethcommon.Address{ethcommon.HexToAddress(contractAddressHex)},
 		Topics: [][]ethcommon.Hash{
 			{ethcommon.HexToHash(constants.BridgeEventSignature)},
