@@ -1,6 +1,7 @@
 package keeper
 
 import (
+	"fmt"
 	"math/rand"
 	"time"
 
@@ -69,6 +70,8 @@ func (k Keeper) GetAcknowledgeBridges(
 		}
 	}
 
+	fmt.Println("GetAcknowledgeBridges:", events)
+
 	return &types.MsgAcknowledgeBridges{
 		Events: events,
 	}
@@ -103,6 +106,8 @@ func (k Keeper) AcknowledgeBridges(
 	// blocks in the future. Returns error if fails to delay any of the messages.
 	delayMsgModuleAccAddrString := delaymsgtypes.ModuleAddress.String()
 	for _, bridgeEvent := range bridgeEvents {
+		fmt.Println("AcknowledgeBridges:", bridgeEvent)
+
 		// delaymsg module should be the authority for completing bridges.
 		msgCompleteBridge := types.MsgCompleteBridge{
 			Authority: delayMsgModuleAccAddrString,

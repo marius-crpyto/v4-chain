@@ -1,6 +1,7 @@
 package process
 
 import (
+	"fmt"
 	"reflect"
 
 	"github.com/cosmos/cosmos-sdk/telemetry"
@@ -49,6 +50,8 @@ func DecodeAcknowledgeBridgesTx(
 	if !ok {
 		return nil, getUnexpectedMsgTypeError(msgAcknowledgeBridgesType, msgs[0])
 	}
+
+	fmt.Println("DecodeAcknowledgeBridgesTx:", acknowledgeBridges.Events)
 
 	return &AcknowledgeBridgesTx{
 		ctx:          ctx,

@@ -113,6 +113,7 @@ func (s *SubTaskRunnerImpl) RunBridgeDaemonTaskLoop(
 	newBridgeEvents := make([]bridgetypes.BridgeEvent, len(logs))
 	for i, log := range logs {
 		newBridgeEvents[i] = libeth.BridgeLogToEvent(log, eventParams.Params.Denom)
+		// Parsed bridge event address=dydx15ac2hq35umayecn2pq7x8jvhjf987qlxxnz4l4 amount=10000000000000000000 denom=tusdc eventID=1 index=0 module=bridge-daemon
 		logger.Info("Parsed bridge event",
 			"index", i,
 			"eventID", newBridgeEvents[i].Id,

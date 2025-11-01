@@ -69,6 +69,7 @@ func (b *BridgeEventManager) AddBridgeEvents(
 
 	// Validate events are contiguous and in-order.
 	for i, event := range events {
+		fmt.Printf("server AddBridgeEvents: event.Id=%d event=%v\n", event.Id, event)
 		if event.Id != events[0].Id+uint32(i) {
 			telemetry.IncrCounter(1, metrics.BridgeServer, metrics.AddBridgeEvents, metrics.EventIdNotSequential)
 			return fmt.Errorf("AddBridgeEvents: Events must be contiguous and in-order")
@@ -77,6 +78,9 @@ func (b *BridgeEventManager) AddBridgeEvents(
 
 	now := b.timeProvider.Now()
 	for _, event := range events {
+		fmt.Printf("server AddBridgeEvents 2: event.Id=%d event=%v\n", event.Id, event)
+		fmt.Printf("server recognizedEventInfo: recognizedEventInfo=%v\n", b.recognizedEventInfo)
+
 		// Ignore stale events which may be the result of a race condition.
 		if event.Id < b.recognizedEventInfo.NextId {
 			telemetry.IncrCounter(1, metrics.BridgeServer, metrics.AddBridgeEvents, metrics.EventIdAlreadyRecognized)
