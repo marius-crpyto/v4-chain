@@ -116,7 +116,7 @@ create_validators() {
 		# edit_genesis "$VAL_CONFIG_DIR" "${TEST_ACCOUNTS[*]}" "${FAUCET_ACCOUNTS[*]}" "${VAULT_ACCOUNTS[*]}" "${VAULT_NUMBERS[*]}" "" "" "" ""
 		edit_genesis_new "$VAL_CONFIG_DIR" "${TEST_ACCOUNTS[*]}" "${FAUCET_ACCOUNTS[*]}" "${VAULT_ACCOUNTS[*]}" "${VAULT_NUMBERS[*]}" "" "" "" ""
 		update_genesis_exchange "$VAL_CONFIG_DIR"
-		update_genesis_complete_bridge_delay "$VAL_CONFIG_DIR" "30"
+		update_genesis_complete_bridge_delay "$VAL_CONFIG_DIR" "5"
 
 		echo "${MNEMONICS[$i]}" | dydxprotocold keys add "${MONIKERS[$i]}" --recover --keyring-backend=test --home "$VAL_HOME_DIR"
 

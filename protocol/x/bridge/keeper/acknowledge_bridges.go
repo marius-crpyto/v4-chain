@@ -28,7 +28,7 @@ func (k Keeper) GetAcknowledgeBridges(
 
 	wallClock := k.bridgeEventManager.GetNow()
 	proposeParams := k.GetProposeParams(ctx)
-
+	fmt.Println("GetAcknowledgeBridges 1:", blockTimestamp)
 	// In order to ensure an upper-bound on liveness issues in the case that +1/3 of validators cannot
 	// properly get logs from an Ethereum node, skip proposing bridge events if any of the following:
 	// - rand.Uint32(1_000_000) < ProposeParams.skip_rate_ppm
