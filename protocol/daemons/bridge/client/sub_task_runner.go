@@ -2,8 +2,11 @@ package client
 
 import (
 	"context"
-	"cosmossdk.io/log"
 	"fmt"
+	"math/big"
+	"time"
+
+	"cosmossdk.io/log"
 	"github.com/cosmos/cosmos-sdk/telemetry"
 	"github.com/dydxprotocol/v4-chain/protocol/daemons/bridge/api"
 	"github.com/dydxprotocol/v4-chain/protocol/daemons/bridge/client/types"
@@ -13,9 +16,6 @@ import (
 	bridgetypes "github.com/dydxprotocol/v4-chain/protocol/x/bridge/types"
 	eth "github.com/ethereum/go-ethereum"
 	ethcommon "github.com/ethereum/go-ethereum/common"
-	ethrpc "github.com/ethereum/go-ethereum/rpc"
-	"math/big"
-	"time"
 )
 
 type SubTaskRunner interface {
@@ -138,7 +138,7 @@ func getFilterQuery(
 
 	return eth.FilterQuery{
 		FromBlock: new(big.Int).SetUint64(fromBlock),
-		ToBlock:   big.NewInt(ethrpc.FinalizedBlockNumber.Int64()),
+		ToBlock:   new(big.Int).SetUint64(fromBlock + 9), //big.NewInt(ethrpc.FinalizedBlockNumber.Int64()),
 		Addresses: []ethcommon.Address{ethcommon.HexToAddress(contractAddressHex)},
 		Topics: [][]ethcommon.Hash{
 			{ethcommon.HexToHash(constants.BridgeEventSignature)},
