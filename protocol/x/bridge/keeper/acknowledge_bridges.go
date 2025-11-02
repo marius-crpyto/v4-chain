@@ -2,10 +2,12 @@ package keeper
 
 import (
 	"fmt"
+	"math/rand"
 	"time"
 
 	"github.com/cosmos/cosmos-sdk/telemetry"
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	"github.com/dydxprotocol/v4-chain/protocol/lib"
 	"github.com/dydxprotocol/v4-chain/protocol/lib/metrics"
 	"github.com/dydxprotocol/v4-chain/protocol/x/bridge/types"
 	delaymsgtypes "github.com/dydxprotocol/v4-chain/protocol/x/delaymsg/types"
@@ -32,13 +34,19 @@ func (k Keeper) GetAcknowledgeBridges(
 	// properly get logs from an Ethereum node, skip proposing bridge events if any of the following:
 	// - rand.Uint32(1_000_000) < ProposeParams.skip_rate_ppm
 	// - blockTimestamp ≤ wallClock - ProposeParams.skip_if_block_delayed_by_duration
+	skipRatePpm := uint32(rand.Intn(int(lib.OneMillion)))
 	// if uint32(rand.Intn(int(lib.OneMillion))) < proposeParams.SkipRatePpm ||
 	// 	!blockTimestamp.After(wallClock.Add(-proposeParams.SkipIfBlockDelayedByDuration)) {
-	// 	fmt.Println("aaaaaaaaaaaaaaa")
-	// 	return &types.MsgAcknowledgeBridges{
-	// 		Events: []types.BridgeEvent{},
-	// 	}
-	// }
+	if skipRatePpm < proposeParams.SkipRatePpm ||
+		!blockTimestamp.After(wallClock.Add(-proposeParams.SkipIfBlockDelayedByDuration)) {
+		fmt.Println("aaaaaaaaaaaaaaa", !blockTimestamp.After(wallClock.Add(-proposeParams.SkipIfBlockDelayedByDuration)))
+		ctx.Logger().Info("Skipping proposing bridge events", "skipRatePpm", skipRatePpm, "blockTimestamp", blockTimestamp, "wallClock", wallClock, "skipIfBlockDelayedByDuration", proposeParams.SkipIfBlockDelayedByDuration)
+
+		// TODO 测试用，注释掉
+		// return &types.MsgAcknowledgeBridges{
+		// 	Events: []types.BridgeEvent{},
+		// }
+	}
 
 	fmt.Println("GetAcknowledgeBridges 2:", wallClock)
 	// Measure latency if not skipping proposing bridge events.
