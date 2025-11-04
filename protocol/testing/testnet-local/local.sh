@@ -61,7 +61,8 @@ TEST_ACCOUNTS=(
 
 FAUCET_ACCOUNTS=(
 	#"dydx1nzuttarf5k2j0nug5yzhr6p74t9avehn9hlh8m" # main faucet
-	"dydx1vdj5z5u9g5t5z22xknsvn59ga3rdtu0j5pfwcp"
+	"dydx1vdj5z5u9g5t5z22xknsvn59ga3rdtu0j5pfwcp",
+	"dydx15ac2hq35umayecn2pq7x8jvhjf987qlxxnz4l4"
 )
 
 # Addresses of vaults.
