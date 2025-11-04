@@ -6,6 +6,7 @@ const (
 	// UusdcDenom is the precomputed denom for IBC Micro USDC.
 	UusdcDenom         = "ibc/8E27BA2D5493AF5636760E354E46004562C46AB7EC0CC4C1CA14E9E20E2545B5"
 	UusdcDenomExponent = -6
+	UTusdcDenom        = "tusdc"
 )
 
 var (
@@ -14,6 +15,15 @@ var (
 		Symbol:           "USDC",
 		DenomExponent:    UusdcDenomExponent,
 		Denom:            UusdcDenom,
+		HasMarket:        false,
+		AtomicResolution: lib.QuoteCurrencyAtomicResolution,
+	}
+
+	AssetTUsdc Asset = Asset{
+		Id:               1,
+		Symbol:           "TUSDC",
+		DenomExponent:    UusdcDenomExponent,
+		Denom:            UTusdcDenom,
 		HasMarket:        false,
 		AtomicResolution: lib.QuoteCurrencyAtomicResolution,
 	}
