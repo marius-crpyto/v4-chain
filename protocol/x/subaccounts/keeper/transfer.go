@@ -36,7 +36,7 @@ func (k Keeper) getValidSubaccountUpdatesForTransfer(
 		bigBalanceDelta.Neg(bigBalanceDelta)
 	}
 
-	if assetId == 0 || assetId == 1 {
+	if assetId == 0 {
 		updates = []types.Update{
 			{
 				SubaccountId: subaccountId,
