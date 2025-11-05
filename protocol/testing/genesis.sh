@@ -620,18 +620,19 @@ function edit_genesis_new() {
 	dasel put -t int -f "$GENESIS" '.app_state.assets.assets.[0].atomic_resolution' -v '-6'
 
 
-	dasel put -t json -f "$GENESIS" '.app_state.assets.assets.[]' -v '{}'
-	dasel put -t int -f "$GENESIS" '.app_state.assets.assets.[1].id' -v '1'
-	dasel put -t string -f "$GENESIS" '.app_state.assets.assets.[1].symbol' -v 'TUSDC'
-	dasel put -t string -f "$GENESIS" '.app_state.assets.assets.[1].denom' -v "$TUSDC_DENOM"
-	dasel put -t string -f "$GENESIS" '.app_state.assets.assets.[1].denom_exponent' -v '-6'
-	dasel put -t bool -f "$GENESIS" '.app_state.assets.assets.[1].has_market' -v 'false'
-	dasel put -t int -f "$GENESIS" '.app_state.assets.assets.[1].market_id' -v '0'
-	dasel put -t int -f "$GENESIS" '.app_state.assets.assets.[1].atomic_resolution' -v '-6'
+	# dasel put -t json -f "$GENESIS" '.app_state.assets.assets.[]' -v '{}'
+	# dasel put -t int -f "$GENESIS" '.app_state.assets.assets.[1].id' -v '1'
+	# dasel put -t string -f "$GENESIS" '.app_state.assets.assets.[1].symbol' -v 'TUSDC'
+	# dasel put -t string -f "$GENESIS" '.app_state.assets.assets.[1].denom' -v "$TUSDC_DENOM"
+	# dasel put -t string -f "$GENESIS" '.app_state.assets.assets.[1].denom_exponent' -v '-6'
+	# dasel put -t bool -f "$GENESIS" '.app_state.assets.assets.[1].has_market' -v 'false'
+	# dasel put -t int -f "$GENESIS" '.app_state.assets.assets.[1].market_id' -v '0'
+	# dasel put -t int -f "$GENESIS" '.app_state.assets.assets.[1].atomic_resolution' -v '-6'
+
 
 	# Update bridge module.
 	# dasel put -t string -f "$GENESIS" '.app_state.bridge.event_params.denom' -v "$NATIVE_TOKEN"
-	dasel put -t string -f "$GENESIS" '.app_state.bridge.event_params.denom' -v "$TUSDC_DENOM"
+	dasel put -t string -f "$GENESIS" '.app_state.bridge.event_params.denom' -v "$USDC_DENOM"
 	dasel put -t int -f "$GENESIS" '.app_state.bridge.event_params.eth_chain_id' -v "$ETH_CHAIN_ID"
 	dasel put -t string -f "$GENESIS" '.app_state.bridge.event_params.eth_address' -v "$ETH_BRIDGE_ADDRESS"
 	dasel put -t int -f "$GENESIS" '.app_state.bridge.acknowledged_event_info.next_id' -v "$BRIDGE_GENESIS_ACKNOWLEDGED_NEXT_ID"
@@ -1330,12 +1331,10 @@ function edit_genesis_new() {
 	dasel put -t string -f "$GENESIS" ".app_state.bank.balances.[$next_bank_idx].coins.[0].denom" -v "${NATIVE_TOKEN}"
 	dasel put -t string -f "$GENESIS" ".app_state.bank.balances.[$next_bank_idx].coins.[0].amount" -v "${bridge_module_account_balance}"
 
-	# 为Bridge模块账户添加tUSDC代币余额
-	# dasel put -t json -f "$GENESIS" ".app_state.bank.balances.[]" -v "{}"
-	# dasel put -t string -f "$GENESIS" ".app_state.bank.balances.[$next_bank_idx].address" -v "${BRIDGE_MODACC_ADDR}"
+	# 为Bridge模块账户添加USDC代币余额
 	dasel put -t json -f "$GENESIS" ".app_state.bank.balances.[$next_bank_idx].coins.[]" -v "{}"
-	dasel put -t string -f "$GENESIS" ".app_state.bank.balances.[$next_bank_idx].coins.[1].denom" -v "${TUSDC_DENOM}"
-	dasel put -t string -f "$GENESIS" ".app_state.bank.balances.[$next_bank_idx].coins.[1].amount" -v "1000000000000000" # 设置合适的初始金额
+	dasel put -t string -f "$GENESIS" ".app_state.bank.balances.[$next_bank_idx].coins.[1].denom" -v "${USDC_DENOM}"
+	dasel put -t string -f "$GENESIS" ".app_state.bank.balances.[$next_bank_idx].coins.[1].amount" -v "1000000000000000000000" # 设置合适的初始金额
 
 	# Set denom metadata
 	set_denom_metadata "$NATIVE_TOKEN" "$NATIVE_TOKEN_WHOLE_COIN" "$COIN_NAME"

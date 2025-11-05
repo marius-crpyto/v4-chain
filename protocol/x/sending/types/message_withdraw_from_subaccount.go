@@ -40,7 +40,7 @@ func (msg *MsgWithdrawFromSubaccount) ValidateBasic() error {
 	}
 
 	// Validate that asset is USDC.
-	if msg.AssetId != assettypes.AssetUsdc.Id && msg.AssetId != assettypes.AssetTUsdc.Id {
+	if msg.AssetId != assettypes.AssetUsdc.Id {
 		return ErrNonUsdcAssetTransferNotImplemented
 	}
 

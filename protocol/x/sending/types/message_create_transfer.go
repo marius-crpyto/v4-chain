@@ -29,7 +29,7 @@ func (msg *MsgCreateTransfer) ValidateBasic() error {
 		return errorsmod.Wrapf(ErrSenderSameAsRecipient, "Sender is the same as recipient (%s)", &msg.Transfer.Sender)
 	}
 
-	if msg.Transfer.AssetId != assettypes.AssetUsdc.Id && msg.Transfer.AssetId != assettypes.AssetTUsdc.Id {
+	if msg.Transfer.AssetId != assettypes.AssetUsdc.Id {
 		return ErrNonUsdcAssetTransferNotImplemented
 	}
 

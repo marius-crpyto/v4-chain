@@ -1141,10 +1141,12 @@ func (k Keeper) AddOrderToOrderbookSubaccountUpdatesCheck(
 		[]satypes.Update{
 			{
 				SubaccountId: subaccountId,
-				AssetUpdates: []satypes.AssetUpdate{{
-					AssetId:          assettypes.AssetUsdc.Id,
-					BigQuantumsDelta: quoteDelta,
-				}},
+				AssetUpdates: []satypes.AssetUpdate{
+					{
+						AssetId:          assettypes.AssetUsdc.Id,
+						BigQuantumsDelta: quoteDelta,
+					},
+				},
 				PerpetualUpdates: []satypes.PerpetualUpdate{{
 					PerpetualId:      perpetualId,
 					BigQuantumsDelta: baseDelta,
