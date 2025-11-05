@@ -36,7 +36,7 @@ func (k Keeper) getValidSubaccountUpdatesForTransfer(
 		bigBalanceDelta.Neg(bigBalanceDelta)
 	}
 
-	if assetId == 0 {
+	if assetId == 0 || assetId == 1 {
 		updates = []types.Update{
 			{
 				SubaccountId: subaccountId,
@@ -100,7 +100,7 @@ func (k Keeper) DepositFundsFromAccountToSubaccount(
 	quantums *big.Int,
 ) error {
 	// TODO(DEC-715): Support non-USDC assets.
-	if assetId != assettypes.AssetUsdc.Id {
+	if assetId != assettypes.AssetUsdc.Id && assetId != assettypes.AssetTUsdc.Id {
 		return types.ErrAssetTransferThroughBankNotImplemented
 	}
 
@@ -163,7 +163,7 @@ func (k Keeper) WithdrawFundsFromSubaccountToAccount(
 	quantums *big.Int,
 ) error {
 	// TODO(DEC-715): Support non-USDC assets.
-	if assetId != assettypes.AssetUsdc.Id {
+	if assetId != assettypes.AssetUsdc.Id && assetId != assettypes.AssetTUsdc.Id {
 		return types.ErrAssetTransferThroughBankNotImplemented
 	}
 
@@ -343,7 +343,7 @@ func (k Keeper) TransferFees(
 	quantums *big.Int,
 ) error {
 	// TODO(DEC-715): Support non-USDC assets.
-	if assetId != assettypes.AssetUsdc.Id {
+	if assetId != assettypes.AssetUsdc.Id && assetId != assettypes.AssetTUsdc.Id {
 		return types.ErrAssetTransferThroughBankNotImplemented
 	}
 
@@ -490,7 +490,7 @@ func (k Keeper) TransferFundsFromSubaccountToSubaccount(
 	quantums *big.Int,
 ) error {
 	// TODO(DEC-715): Support non-USDC assets.
-	if assetId != assettypes.AssetUsdc.Id {
+	if assetId != assettypes.AssetUsdc.Id && assetId != assettypes.AssetTUsdc.Id {
 		return types.ErrAssetTransferThroughBankNotImplemented
 	}
 
