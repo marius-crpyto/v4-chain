@@ -18,10 +18,6 @@ RUN set -eux; apk add --no-cache ca-certificates build-base; apk add git linux-h
 # Download go dependencies
 WORKDIR /dydxprotocol
 
-ENV GOPROXY=https://goproxy.cn,direct
-ENV GOSUMDB=off
-ENV GOPRIVATE=*
-
 COPY go.* ./
 RUN --mount=type=cache,target=/root/.cache/go-build \
     --mount=type=cache,target=/root/go/pkg/mod \
