@@ -1,6 +1,7 @@
 package keeper
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/cosmos/cosmos-sdk/telemetry"
@@ -35,15 +36,19 @@ func (k Keeper) CompleteBridge(
 		return err
 	}
 
+	fmt.Println("CompleteBridge:", bridge)
+
 	// If coin amount is positive, send coin from bridge module account to
 	// specified account.
 	if bridge.Coin.Amount.IsPositive() {
+		fmt.Println("CompleteBridge 2:", bridgeAccAddress)
 		if err = k.bankKeeper.SendCoinsFromModuleToAccount(
 			ctx,
 			types.ModuleName,
 			bridgeAccAddress,
 			sdk.Coins{bridge.Coin},
 		); err != nil {
+			fmt.Println("CompleteBridge 3:", err)
 			return err
 		}
 	}

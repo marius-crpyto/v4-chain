@@ -1,6 +1,9 @@
 package eth_test
 
 import (
+	"encoding/hex"
+	"fmt"
+	"strings"
 	"sync"
 	"testing"
 
@@ -106,6 +109,35 @@ func TestPadOrTruncateAddress(t *testing.T) {
 			require.LessOrEqual(t, len(actual), libeth.MaxAddrLen)
 		})
 	}
+}
+
+func TestAccAddress(t *testing.T) {
+	// 8670D85B598074FA9284DEA6826CB289C2B23823
+	ethAddress := "0x8670D85B598074FA9284DEA6826CB289C2B23823"
+	ethAddress = strings.TrimPrefix(ethAddress, "0x")
+
+	bytes := make([]byte, len(ethAddress)/2)
+	fmt.Sscanf(ethAddress, "%x", &bytes)
+
+	// Pad or truncate address to proper length
+	address := libeth.PadOrTruncateAddress(bytes)
+
+	// Convert to bech32 format with "dydx" prefix
+	bech32Address := sdk.MustBech32ifyAddressBytes("dydx", address)
+
+	fmt.Println("Ethereum address:", ethAddress)
+	fmt.Println("dYdX address:", bech32Address)
+
+	accAddress, err := sdk.AccAddressFromBech32("dydx15ac2hq35umayecn2pq7x8jvhjf987qlxxnz4l4")
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	fmt.Println(accAddress.Bytes())
+	fmt.Println(hex.EncodeToString(accAddress.Bytes()))
+
+	t.Fatal(1)
+
 }
 
 func TestBridgeLogToEvent(t *testing.T) {

@@ -2,8 +2,11 @@ package client
 
 import (
 	"context"
-	"cosmossdk.io/log"
 	"fmt"
+	"math/big"
+	"time"
+
+	"cosmossdk.io/log"
 	"github.com/cosmos/cosmos-sdk/telemetry"
 	"github.com/dydxprotocol/v4-chain/protocol/daemons/bridge/api"
 	"github.com/dydxprotocol/v4-chain/protocol/daemons/bridge/client/types"
@@ -13,9 +16,6 @@ import (
 	bridgetypes "github.com/dydxprotocol/v4-chain/protocol/x/bridge/types"
 	eth "github.com/ethereum/go-ethereum"
 	ethcommon "github.com/ethereum/go-ethereum/common"
-	ethrpc "github.com/ethereum/go-ethereum/rpc"
-	"math/big"
-	"time"
 )
 
 type SubTaskRunner interface {
@@ -85,6 +85,12 @@ func (s *SubTaskRunnerImpl) RunBridgeDaemonTaskLoop(
 		)
 	}
 
+	logger.Info("Fetching logs from Ethereum Node",
+		"contractAddress", eventParams.Params.EthAddress,
+		"fromBlock", recognizedEventInfo.Info.EthBlockHeight,
+		"firstId", recognizedEventInfo.Info.NextId,
+		"numIds", proposeParams.Params.MaxBridgesPerBlock,
+	)
 	// Fetch logs from Ethereum Node.
 	filterQuery := getFilterQuery(
 		eventParams.Params.EthAddress,
@@ -107,7 +113,18 @@ func (s *SubTaskRunnerImpl) RunBridgeDaemonTaskLoop(
 	newBridgeEvents := make([]bridgetypes.BridgeEvent, len(logs))
 	for i, log := range logs {
 		newBridgeEvents[i] = libeth.BridgeLogToEvent(log, eventParams.Params.Denom)
+		// Parsed bridge event address=dydx15ac2hq35umayecn2pq7x8jvhjf987qlxxnz4l4 amount=10000000000000000000 denom=tusdc eventID=1 index=0 module=bridge-daemon
+		logger.Info("Parsed bridge event",
+			"index", i,
+			"eventID", newBridgeEvents[i].Id,
+			"address", newBridgeEvents[i].Address,
+			"amount", newBridgeEvents[i].Coin.Amount.String(),
+			"denom", newBridgeEvents[i].Coin.Denom)
 	}
+
+	logger.Info("Parsed bridge events",
+		"numEvents", len(newBridgeEvents),
+	)
 
 	// Send bridge events to bridge server.
 	if _, err = serviceClient.AddBridgeEvents(ctx, &api.AddBridgeEventsRequest{
@@ -138,7 +155,7 @@ func getFilterQuery(
 
 	return eth.FilterQuery{
 		FromBlock: new(big.Int).SetUint64(fromBlock),
-		ToBlock:   big.NewInt(ethrpc.FinalizedBlockNumber.Int64()),
+		ToBlock:   new(big.Int).SetUint64(fromBlock + 1000), //big.NewInt(ethrpc.FinalizedBlockNumber.Int64()),
 		Addresses: []ethcommon.Address{ethcommon.HexToAddress(contractAddressHex)},
 		Topics: [][]ethcommon.Hash{
 			{ethcommon.HexToHash(constants.BridgeEventSignature)},

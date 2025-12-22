@@ -1,6 +1,7 @@
 package keeper
 
 import (
+	"fmt"
 	"math/rand"
 	"time"
 
@@ -27,18 +28,27 @@ func (k Keeper) GetAcknowledgeBridges(
 
 	wallClock := k.bridgeEventManager.GetNow()
 	proposeParams := k.GetProposeParams(ctx)
-
+	fmt.Println("GetAcknowledgeBridges 1:", blockTimestamp)
+	fmt.Println("GetAcknowledgeBridges 0:", proposeParams, wallClock, blockTimestamp)
 	// In order to ensure an upper-bound on liveness issues in the case that +1/3 of validators cannot
 	// properly get logs from an Ethereum node, skip proposing bridge events if any of the following:
 	// - rand.Uint32(1_000_000) < ProposeParams.skip_rate_ppm
 	// - blockTimestamp ≤ wallClock - ProposeParams.skip_if_block_delayed_by_duration
-	if uint32(rand.Intn(int(lib.OneMillion))) < proposeParams.SkipRatePpm ||
+	skipRatePpm := uint32(rand.Intn(int(lib.OneMillion)))
+	// if uint32(rand.Intn(int(lib.OneMillion))) < proposeParams.SkipRatePpm ||
+	// 	!blockTimestamp.After(wallClock.Add(-proposeParams.SkipIfBlockDelayedByDuration)) {
+	if skipRatePpm < proposeParams.SkipRatePpm ||
 		!blockTimestamp.After(wallClock.Add(-proposeParams.SkipIfBlockDelayedByDuration)) {
-		return &types.MsgAcknowledgeBridges{
-			Events: []types.BridgeEvent{},
-		}
+		fmt.Println("aaaaaaaaaaaaaaa", !blockTimestamp.After(wallClock.Add(-proposeParams.SkipIfBlockDelayedByDuration)))
+		ctx.Logger().Info("Skipping proposing bridge events", "skipRatePpm", skipRatePpm, "blockTimestamp", blockTimestamp, "wallClock", wallClock, "skipIfBlockDelayedByDuration", proposeParams.SkipIfBlockDelayedByDuration)
+
+		// TODO 测试用，注释掉
+		// return &types.MsgAcknowledgeBridges{
+		// 	Events: []types.BridgeEvent{},
+		// }
 	}
 
+	fmt.Println("GetAcknowledgeBridges 2:", wallClock)
 	// Measure latency if not skipping proposing bridge events.
 	defer telemetry.ModuleMeasureSince(
 		types.ModuleName,
@@ -47,18 +57,21 @@ func (k Keeper) GetAcknowledgeBridges(
 		metrics.Latency,
 	)
 	acknowledgedEventInfo := k.GetAcknowledgedEventInfo(ctx)
+	fmt.Println("GetAcknowledgeBridges 3:", acknowledgedEventInfo.NextId)
 	recognizedCutoffTime := wallClock.Add(-proposeParams.ProposeDelayDuration)
 	events := make([]types.BridgeEvent, 0)
 	for i := uint32(0); i < proposeParams.MaxBridgesPerBlock; i++ {
 		// 1. Try to retrieve recognized event with id `NextId + i` from BridgeEventManager.
 		eventToAcknowledge, eventRecognizedAt, found := k.bridgeEventManager.GetBridgeEventById(
 			acknowledgedEventInfo.NextId + i)
+		fmt.Println("GetAcknowledgeBridges 4:", eventToAcknowledge, found)
 		// Stop looking for events with higher IDs if event with current ID is not found.
 		// This assumes that recognized events are assigned IDs that increment by 1 each time.
 		if !found {
 			break
 		}
 
+		fmt.Println("GetAcknowledgeBridges 5:", eventRecognizedAt, recognizedCutoffTime, eventRecognizedAt.Before(recognizedCutoffTime))
 		// 2. Append the new event if it is recognized before the cutoff time.
 		if eventRecognizedAt.Before(recognizedCutoffTime) {
 			events = append(events, eventToAcknowledge)
@@ -68,6 +81,8 @@ func (k Keeper) GetAcknowledgeBridges(
 			break
 		}
 	}
+
+	fmt.Println("GetAcknowledgeBridges 6:", events)
 
 	return &types.MsgAcknowledgeBridges{
 		Events: events,
@@ -103,6 +118,8 @@ func (k Keeper) AcknowledgeBridges(
 	// blocks in the future. Returns error if fails to delay any of the messages.
 	delayMsgModuleAccAddrString := delaymsgtypes.ModuleAddress.String()
 	for _, bridgeEvent := range bridgeEvents {
+		fmt.Println("AcknowledgeBridges:", bridgeEvent)
+
 		// delaymsg module should be the authority for completing bridges.
 		msgCompleteBridge := types.MsgCompleteBridge{
 			Authority: delayMsgModuleAccAddrString,

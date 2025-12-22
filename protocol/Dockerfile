@@ -9,7 +9,7 @@ ARG GOLANG_1_23_ALPINE_DIGEST="ac67716dd016429be8d4c2c53a248d7bcdf06d34127d3dc45
 # Builder
 # --------------------------------------------------------
 
-FROM golang@sha256:${GOLANG_1_23_ALPINE_DIGEST} as builder
+FROM golang@sha256:${GOLANG_1_23_ALPINE_DIGEST} AS builder
 ARG VERSION
 ARG COMMIT
 
@@ -17,6 +17,7 @@ RUN set -eux; apk add --no-cache ca-certificates build-base; apk add git linux-h
 
 # Download go dependencies
 WORKDIR /dydxprotocol
+
 COPY go.* ./
 RUN --mount=type=cache,target=/root/.cache/go-build \
     --mount=type=cache,target=/root/go/pkg/mod \

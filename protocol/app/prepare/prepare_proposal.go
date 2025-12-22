@@ -67,7 +67,7 @@ func PrepareProposalHandler(
 			metrics.Handler,
 			metrics.Latency,
 		)
-
+		fmt.Println("PrepareProposalHandler 1")
 		txs, err := NewPrepareProposalTxs(req)
 		if err != nil {
 			ctx.Logger().Error(fmt.Sprintf("NewPrepareProposalTxs error: %v", err))
@@ -75,6 +75,7 @@ func PrepareProposalHandler(
 			return &EmptyResponse, nil
 		}
 
+		fmt.Println("PrepareProposalHandler 2")
 		// Grab the injected VEs from the previous block.
 		var extCommitBzTx []byte
 		// Sanity check to ensure that there is at least 1 tx. This should never return false unless
@@ -83,6 +84,7 @@ func PrepareProposalHandler(
 			extCommitBzTx = req.Txs[constants.OracleInfoIndex]
 		}
 
+		fmt.Println("PrepareProposalHandler 3")
 		// get the update market prices tx
 		msg, err := priceUpdateGenerator.GetValidMarketPriceUpdates(ctx, extCommitBzTx)
 		if err != nil {
@@ -91,6 +93,7 @@ func PrepareProposalHandler(
 			return &EmptyResponse, nil
 		}
 
+		fmt.Println("PrepareProposalHandler 4")
 		// Gather "FixedSize" group messages.
 		pricesTxResp, err := EncodeMarketPriceUpdates(txConfig, msg)
 		if err != nil {
@@ -98,6 +101,9 @@ func PrepareProposalHandler(
 			recordErrorMetricsWithLabel(metrics.PricesTx)
 			return &abci.ResponsePrepareProposal{Txs: [][]byte{}}, nil
 		}
+
+		fmt.Println("PrepareProposalHandler 5")
+
 		err = txs.SetUpdateMarketPricesTx(pricesTxResp.Tx)
 		if err != nil {
 			ctx.Logger().Error(fmt.Sprintf("SetUpdateMarketPricesTx error: %v", err))
@@ -105,19 +111,22 @@ func PrepareProposalHandler(
 			return &abci.ResponsePrepareProposal{Txs: [][]byte{}}, nil
 		}
 
+		fmt.Println("PrepareProposalHandler 6")
 		fundingTxResp, err := GetAddPremiumVotesTx(ctx, txConfig, perpetualKeeper)
 		if err != nil {
 			ctx.Logger().Error(fmt.Sprintf("GetAddPremiumVotesTx error: %v", err))
 			recordErrorMetricsWithLabel(metrics.FundingTx)
 			return &abci.ResponsePrepareProposal{Txs: [][]byte{}}, nil
 		}
+
+		fmt.Println("PrepareProposalHandler 7")
 		err = txs.SetAddPremiumVotesTx(fundingTxResp.Tx)
 		if err != nil {
 			ctx.Logger().Error(fmt.Sprintf("SetAddPremiumVotesTx error: %v", err))
 			recordErrorMetricsWithLabel(metrics.FundingTx)
 			return &abci.ResponsePrepareProposal{Txs: [][]byte{}}, nil
 		}
-
+		fmt.Println("PrepareProposalHandler 8:", ctx.BlockTime())
 		acknowledgeBridgesTxResp, err := GetAcknowledgeBridgesTx(ctx, txConfig, bridgeKeeper)
 		if err != nil {
 			ctx.Logger().Error(fmt.Sprintf("GetAcknowledgeBridgesTx error: %v", err))
